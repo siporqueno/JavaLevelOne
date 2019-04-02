@@ -18,8 +18,9 @@ public class MainClass {
         numberSign(1);
         System.out.println(isNegative(1));
         greetingByName("сосед");
-        short yearToCheckForLeap = 2019;
+        short yearToCheckForLeap = 1900;
         System.out.println(isLeapYear(yearToCheckForLeap));
+        System.out.println(isLeapYearImproved(yearToCheckForLeap));
 
        /* int x = 25;
         x*=10;
@@ -78,6 +79,11 @@ public class MainClass {
             System.out.println("Such year does not exist!");
             return false;
         }
+    }
+
+    // Home work, task 8 - solution from Artem Evdokimov
+    private static boolean isLeapYearImproved(short year) {
+        return (year % 4 == 0) && (year % 100 != 0) || (year % 400 == 0);
     }
 
 }
