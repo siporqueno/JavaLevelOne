@@ -2,6 +2,9 @@ package Lesson_2;
 
 import java.util.Arrays;
 
+import static Utilities.Utils.printArr;
+import static Utilities.Utils.printArrImproved;
+
 public class LessonTwoHomeWork {
     public static void main(String[] args) {
 
@@ -10,6 +13,7 @@ public class LessonTwoHomeWork {
         int[] arrTestDriveTwo = {2, 2, 2, 1, 2, 2, 10, 1};
         int[] arrTestDriveThree = {1, 1, 1};
         Integer[] arrTestDriveFour = {1, 2, 3, 4, 5};
+        int[][] arrTestDriveFive = {{1, 2, 3}, {4, 5, 6}};
 
         System.out.println("Home work of lesson 2, task 1");
         System.out.println(Arrays.toString(invertBinaryArray(arrTestDriveZero)));
@@ -20,6 +24,11 @@ public class LessonTwoHomeWork {
         System.out.println("Home work of lesson 2, task 3");
         System.out.println(Arrays.toString(multiplyArray()));
 
+        System.out.println("Home work of lesson 2, task 4");
+        printArr(makeSquareArrayWithOnesAtDiagonal(10));
+        printArr(arrTestDriveFive);
+        printArrImproved(arrTestDriveFive);
+
         System.out.println("Home work of lesson 2, task 5");
         getMinMaxOfArray(arrTestDriveOne);
 
@@ -27,7 +36,7 @@ public class LessonTwoHomeWork {
         System.out.println(checkBalance(arrTestDriveTwo));
 
         System.out.println("Home work of lesson 2, task 7");
-        System.out.println(Arrays.toString(moveArrayElements(arrTestDriveFour, 1)));
+        System.out.println(Arrays.toString(moveArrayElements(arrTestDriveFour, 3)));
 
     }
 
@@ -60,6 +69,15 @@ public class LessonTwoHomeWork {
     }
 
     // Home work of lesson 2, task 5
+    static int[][] makeSquareArrayWithOnesAtDiagonal(int sizeOfArray) {
+        int[][] outputArray = new int[sizeOfArray][sizeOfArray];
+        for (int i = 0; i < sizeOfArray; i++) {
+            outputArray[i][i]=1;
+        }
+        return outputArray;
+    }
+
+    // Home work of lesson 2, task 5
     static int[] getMinMaxOfArray(int[] array) {
         int[] valuesMinMaxOfInputArray = {array[0], array[0]};
         for (int i = 1; i < array.length; i++) {
@@ -85,7 +103,7 @@ public class LessonTwoHomeWork {
 
         // Let's now check if there is a place where 2*leftSum == sumOfInputArray
         for (int j = 0; j < inputArray.length; j++) {
-            // Firstly, let's find leftSum. It the sum of elements of inputArray from 0 to j.
+            // Firstly, let's find leftSum. It is the sum of elements of inputArray from 0 to j.
             int leftSum = 0;
             for (int k = 0; k <= j; k++) {
                 leftSum += inputArray[k];
