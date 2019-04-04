@@ -69,11 +69,12 @@ public class LessonTwoHomeWork {
         return outputArray;
     }
 
-    // Home work of lesson 2, task 5
+    // Home work of lesson 2, task 4
     static int[][] makeSquareArrayWithOnesAtDiagonal(int sizeOfArray) {
         int[][] outputArray = new int[sizeOfArray][sizeOfArray];
         for (int i = 0; i < sizeOfArray; i++) {
             outputArray[i][i] = 1;
+            outputArray[i][sizeOfArray-1-i]=1;
         }
         return outputArray;
     }
