@@ -3,7 +3,7 @@ package Lesson_4;
 import java.util.Random;
 import java.util.Scanner;
 
-public class CrossesAndZeroes {
+public class CrucesYCeros {
     public static char[][] field;
     public static final int SIZE_X = 3;
     public static final int SIZE_Y = 3;
@@ -21,7 +21,7 @@ public class CrossesAndZeroes {
             humanStep();
             printField();
 
-            if (checkWinThreeByThreeViaCycles(DOT_PLAYER)) {
+            if (CheckWin(SIZE_Y, SIZE_X, DOTS_TO_WIN, DOT_PLAYER)) {
                 System.out.println("HUMAN BRAINS WIN");
                 break;
             }
@@ -33,7 +33,7 @@ public class CrossesAndZeroes {
 
             aiStep();
             printField();
-            if (checkWinThreeByThreeViaCycles(DOT_AI)) {
+            if (CheckWin(SIZE_Y, SIZE_X, DOTS_TO_WIN, DOT_AI)) {
                 System.out.println("SkyNet WIN");
                 break;
             }
@@ -111,6 +111,7 @@ public class CrossesAndZeroes {
         return false;
     }
 
+    // Home work of Lesson 4, task 2.
     public static boolean checkWinThreeByThreeViaCycles(char symb) {
         int counter = 10;
         // Let's check the rows first.
@@ -130,17 +131,29 @@ public class CrossesAndZeroes {
                 if (counter == DOTS_TO_WIN) return true;
             }
         }
-        // P.S., it's turn of the diagonal \.
+        /*// P.S., it's turn of the main diagonal \.
         for (int k = 0; k < DOTS_TO_WIN; k++) {
             if (k == 0) counter = 0;
             if (field[k][k] == symb) counter++;
             if (counter == DOTS_TO_WIN) return true;
         }
-        // P.S.S., it's turn of the diagonal /.
+        // P.S.S., it's turn of the side diagonal /.
         for (int k = 0; k < DOTS_TO_WIN; k++) {
             if (k == 0) counter = 0;
             if (field[k][SIZE_X - 1 - k] == symb) counter++;
             if (counter == DOTS_TO_WIN) return true;
+        }*/
+
+        // Let's check main and side diagonals simultaneously
+        for (int n = 0; n <= 1; n++) {
+            // When a = 0 and b = 1 we go by main diagonal. Otherwise we go by side diagonal.
+            int a = n == 0 ? 0 : SIZE_X - 1;
+            int b = n == 0 ? 1 : -1;
+            for (int k = 0; k < DOTS_TO_WIN; k++) {
+                if (k == 0) counter = 0;
+                if (field[k][a + b * k] == symb) counter++;
+                if (counter == DOTS_TO_WIN) return true;
+            }
         }
         return false;
     }
@@ -152,6 +165,87 @@ public class CrossesAndZeroes {
             }
         }
         return true;
+    }
+
+    // Home work of Lesson 4, task 3.
+    public static boolean CheckWin(int rowsNo, int columnsNo, int dotsToWin, char symb) {
+        return CheckWinInRows(rowsNo, columnsNo, dotsToWin, symb)
+                || CheckWinInColumns(rowsNo, columnsNo, dotsToWin, symb)
+                || CheckWinInDiagonals(rowsNo, columnsNo, dotsToWin, symb);
+    }
+
+    // Method to check for Win in Rows
+    public static boolean CheckWinInRows(int rowsNo, int columnsNo, int dotsToWin, char symb) {
+        int counter = 10;
+        for (int i = 0; i < rowsNo; i++) {
+            for (int shift = 0; shift <= columnsNo - dotsToWin; shift++) {
+                for (int k = 0; k < DOTS_TO_WIN; k++) {
+                    if (k == 0) counter = 0;
+                    if (field[i][k + shift] == symb) counter++;
+                    if (counter == DOTS_TO_WIN) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Method to check for Win in Columns
+    public static boolean CheckWinInColumns(int rowsNo, int columnsNo, int dotsToWin, char symb) {
+        int counter = 10;
+        for (int j = 0; j < columnsNo; j++) {
+            for (int shift = 0; shift <= rowsNo - dotsToWin; shift++) {
+                for (int k = 0; k < DOTS_TO_WIN; k++) {
+                    if (k == 0) counter = 0;
+                    if (field[k + shift][j] == symb) counter++;
+                    if (counter == DOTS_TO_WIN) return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // Method to check for Win in main diagonals \
+    /*public static boolean CheckWinInMainDiagonals(int rowsNo, int columnsNo, int dotsToWin, char symb) {
+        int counterOne = 10;
+        int counterTwo = 10;
+        for (int i = 0; i <= rowsNo - dotsToWin; i++) {
+            for (int shift = 0; shift <= rowsNo - i - dotsToWin; shift++) {
+                for (int k = 0; k < DOTS_TO_WIN; k++) {
+                    if (k == 0) counterOne = 0;
+                    if (k == 0 && i != 0) counterTwo = 0;
+                    if (field[i + k + shift][k + shift] == symb) counterOne++;
+                    if (counterOne == DOTS_TO_WIN) return true;
+                    if (field[k + shift][i + k + shift] == symb) counterTwo++;
+                    if (counterTwo == DOTS_TO_WIN) return true;
+                }
+            }
+        }
+        return false;
+    }*/
+
+    // Method to check for Win in both main and side diagonals
+    public static boolean CheckWinInDiagonals(int rowsNo, int columnsNo, int dotsToWin, char symb) {
+        int counterOne = 10;
+        int counterTwo = 10;
+        for (int n = 0; n <= 1; n++) {
+            // When a = 0 and b = 1 we go by main diagonal. Otherwise we go by side diagonal.
+            int a = n == 0 ? 0 : SIZE_X - 1;
+            int b = n == 0 ? 1 : -1;
+
+            for (int i = 0; i <= rowsNo - dotsToWin; i++) {
+                for (int shift = 0; shift <= rowsNo - i - dotsToWin; shift++) {
+                    for (int k = 0; k < DOTS_TO_WIN; k++) {
+                        if (k == 0) counterOne = 0;
+                        if (k == 0 && i != 0) counterTwo = 0;
+                        if (field[i + k + shift][a + b * (k + shift)] == symb) counterOne++;
+                        if (counterOne == DOTS_TO_WIN) return true;
+                        if (field[k + shift][a + b * (i + k + shift)] == symb) counterTwo++;
+                        if (counterTwo == DOTS_TO_WIN) return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
 }
