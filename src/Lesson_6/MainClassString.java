@@ -14,14 +14,12 @@ public class MainClassString {
         int counter = 0;
         for (int i = 1; i < str2.length(); i++) {
             if (str2.charAt(i) >= 'A' && str2.charAt(i) <= 'Я') {
-//                stringBuilder.setCharAt(i - 1, '.');
-//                stringBuilder.insert(i, ' ');
                 stringBuilder.insert(i + counter - 1, '.');
                 counter++;
             }
         }
 
-        stringBuilder.insert(stringBuilder.length(), '.');
+        stringBuilder.append('.');
 
         System.out.println(stringBuilder.toString());
 
