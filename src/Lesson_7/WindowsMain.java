@@ -14,6 +14,7 @@ class PrimaryWindow extends JFrame {
         setResizable(false);
         setLayout(new GridLayout(2, 1));
         jtfFIO = new JTextField("Фамилия, Имя, Отчество");
+        jtfFIO.setEditable(false);
         JButton button = new JButton("Заполнить");
         add(jtfFIO);
         add(button);
