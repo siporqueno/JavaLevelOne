@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class CrucesYCeros {
     public static char[][] field;
-    public static final int SIZE_X = 3;
-    public static final int SIZE_Y = 3;
+    public static final int SIZE_X = 4;
+    public static final int SIZE_Y = 4;
     public static final int DOTS_TO_WIN = 3;
     public static final char DOT_EMPTY = '\u2022'; //  bullet point \u2022 , middle point \u00B7
     public static final char DOT_PLAYER = 'X';
@@ -235,8 +235,11 @@ public class CrucesYCeros {
             for (int i = 0; i <= rowsNo - dotsToWin; i++) {
                 for (int shift = 0; shift <= rowsNo - i - dotsToWin; shift++) {
                     for (int k = 0; k < DOTS_TO_WIN; k++) {
-                        if (k == 0) counterOne = 0;
-                        if (k == 0 && i != 0) counterTwo = 0;
+                        if (k == 0) {
+                            counterOne = 0;
+                            counterTwo = 0;
+                        }
+//                        if (k == 0 && i != 0) counterTwo = 0; It is a bug!!! Don't uncomment!!!
                         if (field[i + k + shift][a + b * (k + shift)] == symb) counterOne++;
                         if (counterOne == DOTS_TO_WIN) return true;
                         if (field[k + shift][a + b * (i + k + shift)] == symb) counterTwo++;
