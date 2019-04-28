@@ -263,9 +263,11 @@ public class Map extends JPanel {
             for (int i = 0; i <= rowsNo - dotsToWin; i++) {
                 for (int shift = 0; shift <= rowsNo - i - dotsToWin; shift++) {
                     for (int k = 0; k < dotsToWin; k++) {
-                        if (k == 0) counterOne = 0;
-                        if (k == 0) counterTwo = 0;
-//                        if (k == 0 && i != 0) counterTwo = 0;
+                        if (k == 0) {
+                            counterOne = 0;
+                            counterTwo = 0;
+                        }
+//                        if (k == 0 && i != 0) counterTwo = 0; Tt was a bug!!! Don't uncomment!!!
                         if (field[i + k + shift][a + b * (k + shift)] == figure) counterOne++;
                         if (counterOne == dotsToWin) return true;
                         if (field[k + shift][a + b * (i + k + shift)] == figure) counterTwo++;
