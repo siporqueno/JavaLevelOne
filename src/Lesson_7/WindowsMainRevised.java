@@ -38,11 +38,6 @@ class PrimaryWindowRevised extends JFrame {
         setBounds(100, 100, 400, 100);
         setVisible(true);
     }
-
-    public void setTextFieldText(String txt) {
-        jtfFIO.setText(txt);
-    }
-
 }
 
 class SecondaryWindowRevised extends JFrame {
@@ -75,7 +70,7 @@ class SecondaryWindowRevised extends JFrame {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        primaryWindow.setTextFieldText(jtfSurname.getText() + " " + jtfName.getText() + " " + jtfFartherName.getText());
+                        primaryWindow.jtfFIO.setText(jtfSurname.getText() + " " + jtfName.getText() + " " + jtfFartherName.getText());
                         dispose();
                     }
                 }
